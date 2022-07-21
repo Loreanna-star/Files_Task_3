@@ -22,15 +22,11 @@ def get_file_dict_with_lines_quantity(): # получает словарь на 
 
 def create_summary_file(): # создает файл summary.txt в текущей папке с требуемыми в условии данными
     files_dict = get_file_dict_with_lines_quantity()
-    sorted_files_dict = {} # сортируем словарь по значениям
-    sorted_keys = sorted(files_dict, key = files_dict.get)
-    for w in sorted_keys:
-        sorted_files_dict[w] = files_dict[w]
-    
+    sorted_keys = sorted(files_dict, key = files_dict.get) # отсортированный список ключей (отсортированное количество строк в файлах)
 
     with open ("summary.txt", "a", encoding = "utf-8") as summary_file:   
-        for element in sorted_files_dict:                  
-            summary_file.write(f'{element}\n{str(sorted_files_dict[element])}\n')  
+        for element in sorted_keys:                  
+            summary_file.write(f'{element}\n{str(files_dict[element])}\n')  
             with open(element, encoding = "utf-8") as file:
                 summary_file.write(f'{file.read()}\n')               
     return
